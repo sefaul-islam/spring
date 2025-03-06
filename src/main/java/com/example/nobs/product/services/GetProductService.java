@@ -1,5 +1,6 @@
 package com.example.nobs.product.services;
 
+import com.example.nobs.exception.ProductNotFoundException;
 import com.example.nobs.product.Query;
 import com.example.nobs.product.model.Product;
 import com.example.nobs.product.ProductRepository;
@@ -27,6 +28,6 @@ public class GetProductService implements Query<Void, List<ProductDTO>> {
         List<ProductDTO> productDTOS=products.stream().map(ProductDTO::new).toList();
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(productDTOS);
+        throw new ProductNotFoundException();
     }
 }

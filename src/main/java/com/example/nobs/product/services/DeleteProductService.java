@@ -1,5 +1,6 @@
 package com.example.nobs.product.services;
 
+import com.example.nobs.exception.ProductNotFoundException;
 import com.example.nobs.product.Command;
 import com.example.nobs.product.ProductRepository;
 import com.example.nobs.product.model.Product;
@@ -26,6 +27,6 @@ public class DeleteProductService implements Command<Integer,Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        throw new RuntimeException("Product Not Found");
+        throw new ProductNotFoundException();
     }
 }

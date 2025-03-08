@@ -1,5 +1,6 @@
 package com.example.nobs.product.services;
 
+import com.example.nobs.exception.ProductNotFoundException;
 import com.example.nobs.product.Command;
 import com.example.nobs.product.ProductRepository;
 import com.example.nobs.product.model.Product;
@@ -29,6 +30,6 @@ public class UpdateProductService implements Command<UpdateProductCommand, Produ
             productrepository.save(product);
             return ResponseEntity.ok(new ProductDTO(product));
         }
-        return null;
+        throw new ProductNotFoundException();
     }
 }

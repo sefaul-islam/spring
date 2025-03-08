@@ -24,6 +24,6 @@ public class GetProductServiceById implements Query<Integer, ProductDTO> {
         if(productOptional.isPresent()){
             return ResponseEntity.ok(new ProductDTO(productOptional.get()));
         }
-        return null;
+        throw new RuntimeException("Product Not Found");
     }
 }

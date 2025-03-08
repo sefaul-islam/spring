@@ -28,6 +28,6 @@ public class GetProductService implements Query<Void, List<ProductDTO>> {
         List<ProductDTO> productDTOS=products.stream().map(ProductDTO::new).toList();
 
 
-        throw new ProductNotFoundException();
+        return ResponseEntity.status(HttpStatus.OK).body(productDTOS);
     }
 }

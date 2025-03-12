@@ -1,8 +1,6 @@
 package com.example.nobs.product.model;
 
-import lombok.Getter;
 
-@Getter
 public class ErrorResponse{
     private String message;
 

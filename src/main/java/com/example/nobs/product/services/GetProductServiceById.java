@@ -1,5 +1,6 @@
 package com.example.nobs.product.services;
 
+import com.example.nobs.exception.ProductNotFoundException;
 import com.example.nobs.product.ProductRepository;
 import com.example.nobs.product.Query;
 import com.example.nobs.product.model.Product;
@@ -24,6 +25,6 @@ public class GetProductServiceById implements Query<Integer, ProductDTO> {
         if(productOptional.isPresent()){
             return ResponseEntity.ok(new ProductDTO(productOptional.get()));
         }
-        throw new RuntimeException("Product Not Found");
+        throw new ProductNotFoundException();
     }
 }

@@ -63,8 +63,5 @@ public class ProductController {
     public ResponseEntity<Void> deleteController(@PathVariable Integer id){
         return deleteproductservice.execute(id);
     }
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFound(ProductNotFoundException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(exception.getMessage()));
-    }
+
 }

@@ -6,6 +6,7 @@ import com.example.nobs.product.model.Product;
 import com.example.nobs.product.model.ProductDTO;
 import com.example.nobs.product.model.UpdateProductCommand;
 import com.example.nobs.product.services.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ResponseEntity<ProductDTO> postController(@RequestBody Product product){
+    public ResponseEntity<ProductDTO> postController( @RequestBody Product product){
         return createproductservice.execute(product);
     }
 

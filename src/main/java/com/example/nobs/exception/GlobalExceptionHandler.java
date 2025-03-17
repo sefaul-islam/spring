@@ -1,12 +1,14 @@
 package com.example.nobs.exception;
 
 import com.example.nobs.product.model.ErrorResponse;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,6 +26,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleProductNotValidException(ProductNotValidException exception){
         return new ErrorResponse(exception.getMessage());
+    }
+
+    @ExceptionHandler(jakarta.validation.ConstraintViolationException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleProductValidation(jakarta.validation.ConstraintViolationException exception){
+        return new ErrorResponse(exception.getConstraintViolations().iterator().next().getMessage());
     }
 
 }

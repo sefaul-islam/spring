@@ -9,9 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
+import static org.mockito.Mockito.when;
+
 public class GetProductServiceTest {
     @Mock //what to mock the response, in this case the productrepository
-    private ProductRepository productrepository;
+    private ProductRepository productRepository;
 
     @InjectMocks // the thing we are testing
     private GetProductService getproductservice;
@@ -31,7 +35,7 @@ public class GetProductServiceTest {
         product.setDescription("cause this is all we knoww");
         product.setPrice(20.00);
 
-
+        when(productRepository.findById(1)).thenReturn(Optional.of(product));
         //when
 
 

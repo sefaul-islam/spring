@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.Setter;
 
 
-
+@Data
 @Entity  //use this annotation for mapping the class's intances for mysql
-
+@Setter
 @Table(name = "product")
 public class Product {
     @Id //this is used for marking a primary key to identify the entity
@@ -40,27 +42,27 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
+    public @PositiveOrZero(message = "Price cannnot be negative") Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(@PositiveOrZero(message = "Price cannnot be negative") Double price) {
         this.price = price;
+    }
+
+    public @Size(min = 20, message = "Description must be 20 characters long") String getDescription() {
+        return description;
+    }
+
+    public void setDescription(@Size(min = 20, message = "Description must be 20 characters long") String description) {
+        this.description = description;
+    }
+
+    public @NotNull(message = "Name is required") @NotBlank(message = "The name cannot be blank") String getName() {
+        return name;
+    }
+
+    public void setName(@NotNull(message = "Name is required") @NotBlank(message = "The name cannot be blank") String name) {
+        this.name = name;
     }
 }

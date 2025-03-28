@@ -1,6 +1,8 @@
 package com.example.nobs.product.model;
 
+import lombok.Getter;
 
+@Getter
 public class UpdateProductCommand {
     private Integer id;
 

@@ -7,6 +7,7 @@ import com.example.nobs.product.model.Product;
 import com.example.nobs.product.model.ProductDTO;
 import com.example.nobs.product.model.UpdateProductCommand;
 import com.example.nobs.product.validators.ProductValidator;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class UpdateProductService implements Command<UpdateProductCommand, Produ
     }
 
     @Override
+    @CacheEvict(value = "productCache", key ="command.getId()" )
     public ResponseEntity<ProductDTO> execute(UpdateProductCommand command) {
         Optional<Product>productOptional = productrepository.findById(command.getId());
         if(productOptional.isPresent()){

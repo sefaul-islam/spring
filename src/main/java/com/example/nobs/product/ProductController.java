@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
 
@@ -42,32 +43,32 @@ public class ProductController {
     }
 
 
-    @PostMapping("/product")
+    @PostMapping
     public ResponseEntity<ProductDTO> postController( @RequestBody Product product){
         return createproductservice.execute(product);
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public ResponseEntity<List<ProductDTO>> getController(){
         return getproductservice.execute(null);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getControllerById(@PathVariable Integer id){
         return getproductservicebyid.execute(id);
     }
 
-    @PutMapping("/product/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> putController(@PathVariable Integer id,@RequestBody Product product){
        return updateproductservice.execute(new UpdateProductCommand(id, product));
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteController(@PathVariable Integer id){
         return deleteproductservice.execute(id);
     }
 
-    @GetMapping("/product/search")
+    @GetMapping("/search")
     public ResponseEntity<List<ProductDTO>> searchProductByName(@RequestParam String name){
       return searchproductservice.execute(name);
     }
